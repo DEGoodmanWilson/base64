@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 class Base64Conan(ConanFile):
     name = "base64"
-    version = "1.0.1"
+    version = "1.0.2"
     url = "https://github.com/DEGoodmanWilson/base64.git"
     license = "BSD"
     settings = "os", "compiler", "build_type", "arch"
