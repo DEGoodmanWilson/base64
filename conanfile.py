@@ -20,7 +20,7 @@ class Base64Conan(ConanFile):
                 del self.requires["gtest"]
 
     def build(self):
-        cmake = CMake(self.settings)
+        cmake = CMake(self)
         build_base64_tests = "-DBUILD_BASE64_TESTS=ON" if self.options.build_base64_tests else "-DBUILD_BASE64_TESTS=OFF"
 
         self.run('cmake %s %s %s' % (build_base64_tests, self.conanfile_directory, cmake.command_line))
