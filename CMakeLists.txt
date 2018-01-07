@@ -5,11 +5,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-##### External dependencies
-
-include(conanbuildinfo.cmake)
-CONAN_BASIC_SETUP()
-
 ##### Options
 
 macro(base64_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
