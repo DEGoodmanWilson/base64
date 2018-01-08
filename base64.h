@@ -27,5 +27,11 @@
 
 #include <string>
 
-std::string base64_encode(const std::string &s);
-std::string base64_decode(const std::string &s);
+#ifdef WIN32
+  #define BASE64_EXPORT __declspec(dllexport)
+#else
+  #define BASE64_EXPORT
+#endif
+
+BASE64_EXPORT std::string base64_encode(const std::string &s);
+BASE64_EXPORT std::string base64_decode(const std::string &s);
