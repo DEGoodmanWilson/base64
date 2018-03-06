@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(base64)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
