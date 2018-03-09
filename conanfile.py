@@ -24,14 +24,13 @@ class Base64Conan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_SHARED"] = self.options.shared
         cmake.configure()
         cmake.build()
         self.run('ctest . --verbose')
 
     def package(self):
         self.copy(pattern="LICENSE")
-        self.copy(pattern="*.[h|hpp]", dst="include/{0}".format(self.name), src="sources")
+        self.copy(pattern="*.h", dst="include/{0}".format(self.name), src="sources")
         self.copy(pattern="*.dll", dst="bin", src="bin", keep_path=False)
         self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
         self.copy(pattern="*.a", dst="lib", src="lib", keep_path=False)

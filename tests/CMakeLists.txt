@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.2)
+
 add_executable(${PROJECT_NAME}_tests
 	main.cpp
     basic_functioning.cpp
