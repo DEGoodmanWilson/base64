@@ -21,8 +21,8 @@ target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
 
 #### tests
 
-enable_testing()
-include_directories(SYSTEM PRIVATE .)
-add_subdirectory(tests)
+# enable_testing()
+# include_directories(SYSTEM PRIVATE .)
+# add_subdirectory(tests)
 
-add_test(ALL_TESTS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}_tests)
+# add_test(ALL_TESTS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}_tests)
