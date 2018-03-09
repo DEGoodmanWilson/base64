@@ -30,7 +30,7 @@ class Base64Conan(ConanFile):
 
     def package(self):
         self.copy(pattern="LICENSE")
-        self.copy(pattern="*.h", dst="include/{0}".format(self.name), src="sources")
+        self.copy(pattern="*.h", dst="include/{0}".format(self.name))
         self.copy(pattern="*.dll", dst="bin", src="bin", keep_path=False)
         self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
         self.copy(pattern="*.a", dst="lib", src="lib", keep_path=False)
