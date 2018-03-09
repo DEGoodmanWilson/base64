@@ -18,21 +18,16 @@ class Base64Conan(ConanFile):
                        "tests/CMakeLists.txt", "tests/basic_functioning.cpp", "tests/main.cpp",\
                        "test_package/CMakeLists.txt", "test_package/conanfile.py", "test_package/test_package.cpp"]
     settings = "os", "arch", "compiler", "build_type"
-    options = {"shared": [True, False], "build_tests": [True, False]}
-    default_options = "shared=False", "build_tests=False"
-
-    def requirements(self):
-        #use dynamic org/channel for libs in DEGoodmanWilson
-        if self.options.build_tests:
-            self.requires.add("gtest/1.8.0@bincrafters/stable", private=False)
-            self.options["gtest"].shared = self.options["shared"]
+    options = {"shared": [True, False]}
+    default_options = "shared=False"
+    build_requires = "gtest/1.8.0@bincrafters/stable"
 
     def build(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_BASE64_TESTS"] = self.options.build_tests
         cmake.definitions["BUILD_SHARED"] = self.options.shared
         cmake.configure()
         cmake.build()
+        self.run('ctest . --verbose')
 
     def package(self):
         self.copy(pattern="LICENSE")

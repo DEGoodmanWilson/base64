@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 2.8)
-project(base64)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+cmake_minimum_required(VERSION 3.9)
+set(PROJECT_NAME base64)
+project(${PROJECT_NAME})
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+
+##### External dependencies
+
+include(conanbuildinfo.cmake)
+CONAN_BASIC_SETUP()
 
 ##### Options
 
@@ -20,22 +23,28 @@ macro(base64_option OPTION_NAME OPTION_TEXT OPTION_DEFAULT)
     message(STATUS "  ${OPTION_NAME}: ${${OPTION_NAME}}")
 endmacro()
 
-message(STATUS "Base64 CMake Options")
+message(STATUS "${PROJECT_NAME} CMake Options")
 message(STATUS "=======================================================")
-base64_option(BUILD_BASE64_TESTS    "Build the test suite"           OFF)
 base64_option(BUILD_SHARED          "Build a shared object"          OFF)
 message(STATUS "=======================================================")
 
-if (BUILD_BASE64_TESTS)
-    message(STATUS "Building Base64 with Tests")
-    add_subdirectory(tests)
-endif ()
+#### tests
+
+enable_testing()
+include_directories(SYSTEM PRIVATE .)
+add_subdirectory(tests)
+
+add_test(ALL_TESTS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}_tests)
+
+#### library
 
 set(SOURCE_FILES base64.cpp base64.h)
 
-# if (BUILD_SHARED)
-#    set(CMAKE_MACOSX_RPATH ON)
-#    add_library(base64 SHARED ${SOURCE_FILES})
-#else (BUILD_SHARED)
-    add_library(base64 ${SOURCE_FILES})
-#endif (BUILD_SHARED)
+if (BUILD_SHARED)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+    add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+    set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON) # This doesn't seem to be actually working…
+else (BUILD_SHARED)
+    add_library(${PROJECT_NAME} ${SOURCE_FILES})
+endif (BUILD_SHARED)
