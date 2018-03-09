@@ -20,13 +20,13 @@ class Base64Conan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False]}
     default_options = "shared=False"
-    build_requires = "gtest/1.8.0@bincrafters/stable"
+    # build_requires = "gtest/1.8.0@bincrafters/stable"
 
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        self.run('ctest . --verbose')
+       # self.run('ctest . --verbose')
 
     def package(self):
         self.copy(pattern="LICENSE")
