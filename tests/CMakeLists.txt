@@ -5,4 +5,4 @@ add_executable(${PROJECT_NAME}_tests
     ${PROJECT_SOURCE_DIR}/base64.h
     )
 
-target_link_libraries(base64_tests ${CONAN_LIBS})
+target_link_libraries(${PROJECT_NAME}_tests ${CONAN_LIBS})
