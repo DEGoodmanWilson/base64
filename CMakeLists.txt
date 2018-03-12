@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 
 project(base64)
 
-##### Use C++14
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 ##### External dependencies
